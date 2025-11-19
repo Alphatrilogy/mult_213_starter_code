@@ -24,7 +24,8 @@ async function main() {
                 console.log("demo - Run a demo of 10 games between two preset players");
                 console.log("game - Play a game of Rock, Paper, Scissors");
                 console.log("poke - Fetch info about a given Pokemon");
-                console.log("sandbox - Run the sandbox async example");
+                console.log("sandbox - Run the sandbox async example from unit 4");
+                console.log("stocks - Fetch weekly stock data for a hardcoded ticker (IBM)");
                 console.log("q - Quit the application");
                 break;
             case "q":
@@ -53,6 +54,15 @@ async function main() {
                 break;
             case "sandbox":
                 await sandbox();
+                break;
+            case "stocks":
+                const stockTicker = "IBM"; // Hardcoded for now
+                const stockUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY_ADJUSTED&symbol=${stockTicker}&apikey=demo`;
+                const stockResponse = await fetch(stockUrl);
+                if (stockResponse.ok) {
+                    const stockData = await stockResponse.json();
+                    console.log(`Stock data: ${JSON.stringify(stockData)}`);
+                }
                 break;
             default:
                 console.log("What are you even trying to do? Type 'h' for help.");
